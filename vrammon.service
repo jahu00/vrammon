@@ -1,0 +1,18 @@
+[Unit]
+Description=vrammon-server — GPU VRAM / utilization web dashboard
+Documentation=file:/home/pi/workspace/toolbox/vrammon/README.md
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/pi/workspace/toolbox/vrammon
+ExecStart=/usr/bin/python3 /home/pi/workspace/toolbox/vrammon/vrammon_server.py --host 127.0.0.1 --port 8787 --interval 1.0
+Restart=on-failure
+RestartSec=3
+# Read-only access to /sys and /proc is all the sampler needs.
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=read-only
+
+[Install]
+WantedBy=default.target
